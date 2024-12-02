@@ -2,7 +2,15 @@ import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export const useAppsStore = create(
+type AppStoreState = {
+  hasSeenOnboarding: boolean;
+};
+
+type AppStoreActions = {
+  setHasSeenOnboarding: (hasSeenOnboarding: boolean) => void;
+};
+
+export const useAppsStore = create<AppStoreState & AppStoreActions>()(
   persist(
     (set) => ({
       hasSeenOnboarding: false,
